@@ -1,0 +1,56 @@
+{
+  "title": "Lipi: Handwritten Glyphs of Seven Historical Scripts of Nepal",
+  "upload_type": "dataset",
+  "description": "<p><strong>Lipi</strong> is a standardized corpus of 16,350 handwritten glyph images across 327 character classes representing seven historical writing systems of Nepal spanning over two millennia of orthographic evolution: Ashokan Brahmi, Licchavi, Bhujimol, Nandinagari, Maithili/Tirhuta, Tibetan Uchen, and Kirat Sirijunga.</p><p>The glyphs were handwritten on standardized grid sheets following reference charts provided by the Department of Archaeology (DoA), Government of Nepal. Each class holds 25 collected glyphs paired with 25 synthetically augmented copies, complete with verified pair mappings, benchmark splits, and a datasheet.</p><p>Code repository: <a href=\"https://github.com/ashimst/lipi\">https://github.com/ashimst/lipi</a></p>",
+  "creators": [
+    {
+      "name": "Shrestha, Ashim",
+      "affiliation": "Department of Artificial Intelligence, School of Engineering, Kathmandu University, Nepal"
+    },
+    {
+      "name": "Bajracharya, Sujal",
+      "affiliation": "Department of Artificial Intelligence, School of Engineering, Kathmandu University, Nepal"
+    },
+    {
+      "name": "Tuladhar, Yajjyu",
+      "affiliation": "Department of Artificial Intelligence, School of Engineering, Kathmandu University, Nepal"
+    },
+    {
+      "name": "Kunwar, Kushal",
+      "affiliation": "Department of Artificial Intelligence, School of Engineering, Kathmandu University, Nepal"
+    },
+    {
+      "name": "Regmi, Sunil",
+      "affiliation": "Department of Artificial Intelligence, School of Engineering, Kathmandu University, Nepal"
+    },
+    {
+      "name": "Bal, Bal Krishna",
+      "affiliation": "Department of Artificial Intelligence, School of Engineering, Kathmandu University, Nepal"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-nc-4.0",
+  "keywords": [
+    "Historical scripts of Nepal",
+    "Few-shot learning",
+    "Indic epigraphy",
+    "Paleography",
+    "Handwritten character recognition",
+    "Brahmi",
+    "Licchavi",
+    "Bhujimol",
+    "Nandinagari",
+    "Maithili",
+    "Tibetan Uchen",
+    "Kirat Sirijunga",
+    "Document Analysis",
+    "Cultural Heritage Preservation"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/ashimst/lipi",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

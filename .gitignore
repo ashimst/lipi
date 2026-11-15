@@ -10,6 +10,8 @@ data/manuscripts/
 # runs: results and logs are tracked, weights are not
 runs/**/checkpoint.pt
 runs/**/result.json.tmp
+# distribution archives
+dist/
 *.zip
 *.pth
 
