@@ -23,3 +23,7 @@ __pycache__/
 .venv/
 .vscode/
 .claude/
+
+# local temporary runner and shard tools
+tools/kaggle_*.py
+*shard*.json
