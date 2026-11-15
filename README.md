@@ -1,5 +1,7 @@
 # Lipi
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24240673.svg)](https://doi.org/10.5281/zenodo.24240673)
+
 Few-shot recognition of seven historical scripts of Nepal: Ashokan Brahmi, Licchavi,
 Bhujimol, Nandinagari, Maithili (Tirhuta), Tibetan Uchen and Kirat Sirijunga.
 
@@ -10,13 +12,16 @@ dataset itself is described in [DATASET_CARD.md](DATASET_CARD.md).
 ## Setup
 
 ```bash
-git clone <repository-url> lipi && cd lipi
+git clone https://github.com/ashimst/lipi.git && cd lipi
 pip install torch torchvision          # pick the build for your GPU: https://pytorch.org
 pip install -r requirements.txt
 ```
 
-Download the images and unpack them so that `data/canonical/<script>/<character>/*.png`
-exists. (Link: to be added with the dataset release.)
+Download the images automatically from Zenodo:
+
+```bash
+python tools/download_zenodo.py --record 24240673
+```
 
 Check the installation:
 
@@ -95,4 +100,13 @@ runs/            results
 
 ## Citation
 
-To be added on publication.
+```bibtex
+@misc{shrestha2026lipi,
+  title        = {{Lipi: Handwritten Glyphs of Seven Historical Scripts of Nepal (Version 1)}},
+  author       = {Shrestha, Ashim and Bajracharya, Sujal and Tuladhar, Yajjyu and Kunwar, Kushal and Regmi, Sunil and Bal, Bal Krishna},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.24240673},
+  url          = {https://doi.org/10.5281/zenodo.24240673}
+}
+```

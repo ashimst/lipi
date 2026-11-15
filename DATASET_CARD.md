@@ -11,8 +11,8 @@ Dataset card following *Datasheets for Datasets* (Gebru et al., 2021). Items mar
 | Classes | 327 (one class = one character of one script) |
 | Images per class | 50 (25 glyphs + 25 augmented copies) |
 | Scripts | Ashokan Brahmi, Licchavi, Bhujimol, Nandinagari, Maithili/Tirhuta, Tibetan Uchen, Kirat Sirijunga |
-| Licence | **[TO FILL]** (CC BY-NC 4.0 is common for heritage datasets) |
-| Citation | **[TO FILL]** once the paper is published |
+| Licence | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| Citation | Shrestha et al. (2026), Zenodo: [10.5281/zenodo.24240673](https://doi.org/10.5281/zenodo.24240673) |
 
 | Script | Classes | Images |
 |---|---:|---:|
