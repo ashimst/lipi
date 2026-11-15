@@ -83,4 +83,4 @@ Character folder names are romanized transliterations (e.g. `ka`, `kha`, `aa`). 
 
 ## Maintenance
 
-Maintainer and contact: **[TO FILL]**. Report errors in labels or pairs through the repository's issue tracker.
+Maintainer and contact: Ashim Shrestha (<ashimshrestha423@gmail.com>). Report errors in labels or pairs through the repository's issue tracker.
