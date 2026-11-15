@@ -13,6 +13,7 @@ runs/**/result.json.tmp
 # distribution archives
 dist/
 incoming/
+predictions_for_kk/
 *.zip
 *.pth
 
