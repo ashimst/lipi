@@ -12,6 +12,7 @@ runs/**/checkpoint.pt
 runs/**/result.json.tmp
 # distribution archives
 dist/
+incoming/
 *.zip
 *.pth
 

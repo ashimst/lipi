@@ -15,7 +15,7 @@ from pathlib import Path
 from .data import REPO, SCRIPTS, runs_dir
 from .experiments import GROUPS, all_jobs, select
 
-MAX_CHECKPOINT_MB = 25      # larger checkpoints are left out of result bundles
+MAX_CHECKPOINT_MB = 250     # larger checkpoints are left out of result bundles
 
 
 def finished(job) -> bool:
@@ -67,8 +67,21 @@ def cmd_train(args):
 
 def cmd_pack(args):
     """Bundle finished results into one zip to send back."""
-    name = f"lipi_runs_{args.who}_{time.strftime('%Y%m%d_%H%M')}.zip"
-    target = Path(args.out or REPO) / name
+    if getattr(args, "name", None):
+        name = args.name if args.name.endswith(".zip") else f"{args.name}.zip"
+    elif args.who.startswith("part_") or args.who.isdigit():
+        p_num = int(args.who.replace("part_", ""))
+        name = f"lipi_part_{p_num:02d}.zip"
+    else:
+        name = f"lipi_runs_{args.who}_{time.strftime('%Y%m%d_%H%M')}.zip"
+
+    out_path = Path(args.out) if args.out else REPO
+    if out_path.suffix == ".zip":
+        target = out_path
+    else:
+        out_path.mkdir(parents=True, exist_ok=True)
+        target = out_path / name
+
     count = 0
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as bundle:
         for folder in sorted(p for p in runs_dir().iterdir() if (p / "result.json").exists()):
@@ -95,6 +108,34 @@ def cmd_unpack(args):
                 target.write_bytes(bundle.read(member))
                 added += 1
         print(f"{bundle_path}: {added} file(s) added, {skipped} already present")
+
+
+def cmd_ingest(args):
+    """Automatically find and unpack all lipi_part_*.zip or lipi_runs_*.zip in repo root or incoming/."""
+    candidates = []
+    for search_dir in (REPO, REPO / "incoming", REPO / "incoming_runs"):
+        if search_dir.exists():
+            candidates.extend(search_dir.glob("*.zip"))
+
+    zip_bundles = sorted({p for p in candidates if "lipi" in p.name.lower()})
+    if not zip_bundles:
+        print(f"No result archives found in:\n  - {REPO}\n  - {REPO / 'incoming'}\n")
+        print("Drop your downloaded 'lipi_part_01.zip' ... 'lipi_part_12.zip' files into:")
+        print(f"  {REPO / 'incoming'}")
+        print("Then run:  python run.py ingest")
+        return
+
+    print(f"Found {len(zip_bundles)} archive(s) to ingest:")
+    for b in zip_bundles:
+        print(f"  -> {b.name} ({b.stat().st_size / 2**20:.1f} MB)")
+
+    class UnpackArgs:
+        bundles = [str(b) for b in zip_bundles]
+
+    cmd_unpack(UnpackArgs())
+    print("\n--- Current Status ---")
+    cmd_status(None)
+    cmd_summarize(None)
 
 
 def flatten(prefix, node, out):
@@ -213,10 +254,14 @@ def main():
     p.add_argument("--who", default=who, help="your name, recorded in every result")
     p.set_defaults(run=cmd_train)
     p = sub.add_parser("pack", help="zip finished results to send back")
-    p.add_argument("--who", default=who); p.add_argument("--out"); p.add_argument("--all-checkpoints", action="store_true")
+    p.add_argument("--who", default=who)
+    p.add_argument("--name", help="custom filename for zip archive, e.g. lipi_part_01.zip")
+    p.add_argument("--out")
+    p.add_argument("--all-checkpoints", action="store_true")
     p.set_defaults(run=cmd_pack)
     p = sub.add_parser("unpack", help="merge result zips into runs/"); p.add_argument("bundles", nargs="+")
     p.set_defaults(run=cmd_unpack)
+    p = sub.add_parser("ingest", help="automatically find and unpack all downloaded zip files in root or incoming/"); p.set_defaults(run=cmd_ingest)
     p = sub.add_parser("summarize", help="mean and sd over seeds -> runs/summary.csv"); p.set_defaults(run=cmd_summarize)
     p = sub.add_parser("genealogy", help="tree distance vs shape and transfer"); p.set_defaults(run=cmd_genealogy)
     p = sub.add_parser("manuscripts", help="score crops from original manuscripts"); p.set_defaults(run=cmd_manuscripts)

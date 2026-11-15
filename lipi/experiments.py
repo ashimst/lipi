@@ -56,10 +56,11 @@ def all_jobs() -> list[Job]:
                       tuple(dict.fromkeys(old.suites + job.suites)), tuple(dict.fromkeys(old.groups + job.groups)))
         jobs[job.id] = job
 
+    COMMON_SUITES = ("core", "scripts", "omniglot", "degradation")
     for seed in SEEDS:
-        suites = {"conv6": FULL, "resnet12": ("core", "scripts", "omniglot", "degradation")}
+        suites = {"conv6": FULL}
         for encoder in ("conv4", "conv6", "shufflenet_v2", "mobilenet_v2", "resnet12", "resnet18_imagenet"):
-            add(Job("fewshot", "ancestry", encoder, MAIN_SIZE, seed, suites.get(encoder, ("core",)), ("encoders",)))
+            add(Job("fewshot", "ancestry", encoder, MAIN_SIZE, seed, suites.get(encoder, COMMON_SUITES), ("encoders",)))
 
         for encoder in ("conv6", "resnet12"):
             add(Job("untrained", "ancestry", encoder, MAIN_SIZE, seed, ("core", "omniglot"), ("baselines",)))

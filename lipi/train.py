@@ -32,7 +32,7 @@ class Recipe:
     n_way: int = 5
     n_shot: int = 5
     n_query: int = 10
-    episodes_per_epoch: int = 80
+    episodes_per_epoch: int = 100
     max_epochs: int = 100
     lr: float = 0.01
     momentum: float = 0.9
