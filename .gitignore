@@ -1,0 +1,23 @@
+# manuscript sources and everything from before the clean-up stay local
+paper/
+legacy/
+
+# data: images are distributed separately (see README); splits and metadata are tracked
+data/canonical/
+data/omniglot/
+data/manuscripts/
+
+# runs: results and logs are tracked, weights are not
+runs/**/checkpoint.pt
+runs/**/result.json.tmp
+*.zip
+*.pth
+
+# python / editors
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+.vscode/
+.claude/
